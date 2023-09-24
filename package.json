@@ -1,0 +1,29 @@
+{
+	"name": "ts-vitest-e2e",
+	"version": "1.0.0",
+	"description": "Repo created to practice E2E tests",
+	"main": "server.ts",
+	"scripts": {
+		"test": "vitest",
+		"test:coverage": "npx vitest run --coverage",
+		"dev": "nodemon server.ts",
+		"build": "tsup src"
+	},
+	"author": "João Siqueira",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/express": "^4.17.18",
+		"@types/morgan": "^1.9.5",
+		"@types/node": "^20.6.3",
+		"nodemon": "^3.0.1",
+		"ts-node": "^10.9.1",
+		"tsup": "^7.2.0",
+		"tsx": "^3.12.10",
+		"typescript": "^5.2.2"
+	},
+	"dependencies": {
+		"dotenv": "^16.3.1",
+		"express": "^4.18.2",
+		"morgan": "^1.10.0"
+	}
+}
