@@ -1,6 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
-import { IController } from './interfaces/controller.interface'; //pegando tudo o que está implementado dentro do IController, que é a interface que é implementada em cada classe de controller
+import { IController } from './utils/interfaces/controller/controller.interface'; //pegando tudo o que está implementado dentro do IController, que é a interface que é implementada em cada classe de controller
 
 class App {
 	app: express.Application; //pegando tudo o que tem dentro da interface application, métodos etc (express, use, listen, etc) (inversão de dependência)(aberto e fechado), esse app vai ser acesso quando instanciarmos a classe App no server
