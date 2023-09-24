@@ -1,6 +1,7 @@
 import 'dotenv/config'; //responsável por importar as variáveis de ambiente do .env e colocar na app.
 import HelloWorldController from './controller/helloworld.controller';
 import App from './app';
+import { MongoDbConn } from './infra/mongoose/mongodb';
 
 /* Main Function, responsável por juntar TODAS as abstrações (instâncias) e usa-las em seus serviços que esperam receber uma instância de uma classe abstrata.
 
@@ -10,11 +11,13 @@ export async function server(): Promise<void> {
 	/**
 	 * Instance of Connections
 	 */
+	const mongo = new MongoDbConn();
 
 	/**
 	 * Up connections
 	 */
 
+	await mongo.connect();
 	/**
 	 * Inicilização das Services
 	 */
