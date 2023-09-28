@@ -3,8 +3,13 @@ import Users from '../infra/mongoose/models/users';
 import { IUserRepository } from '../utils/interfaces/repository/users.interface';
 
 export class UserRepository implements IUserRepository {
-	async create(user: IUser): Promise<IUser> {
-		const newUser = new Users(user);
+	async create(
+		name: string,
+		username: string,
+		password: string,
+		created_at: Date,
+	): Promise<IUser> {
+		const newUser = new Users({ name, username, password, created_at });
 		return newUser.save();
 	}
 
