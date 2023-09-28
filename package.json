@@ -15,11 +15,13 @@
 		"@types/express": "^4.17.18",
 		"@types/morgan": "^1.9.5",
 		"@types/node": "^20.6.3",
+		"@vitest/coverage-v8": "^0.34.5",
 		"nodemon": "^3.0.1",
 		"ts-node": "^10.9.1",
 		"tsup": "^7.2.0",
 		"tsx": "^3.12.10",
-		"typescript": "^5.2.2"
+		"typescript": "^5.2.2",
+		"vitest": "^0.34.5"
 	},
 	"dependencies": {
 		"dotenv": "^16.3.1",
