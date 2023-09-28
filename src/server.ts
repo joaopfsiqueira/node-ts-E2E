@@ -2,8 +2,8 @@ import 'dotenv/config'; //responsável por importar as variáveis de ambiente do
 import App from './app';
 import { MongoDbConn } from './infra/mongoose/mongodb';
 import { UserRepository } from './repositories/users.repository';
-import UserController from './domain/users/users.controller';
-import UserService from './domain/users/users.service';
+import UserController from './controller/users.controller';
+import UserService from './service/users.service';
 
 /* Main Function, responsável por juntar TODAS as abstrações (instâncias) e usa-las em seus serviços que esperam receber uma instância de uma classe abstrata.
 

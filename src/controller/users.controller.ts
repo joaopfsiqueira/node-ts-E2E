@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
-import { Http } from '../../utils/enum/http';
-import { IUserService } from '../../utils/interfaces/service/user.service.interface';
-import { IController } from '../../utils/interfaces/controller/controller.interface';
+import { Http } from '../utils/enum/http';
+import { IUserService } from '../utils/interfaces/service/user.service.interface';
+import { IController } from '../utils/interfaces/controller/controller.interface';
 
 class UserController implements IController {
 	public router: Router;

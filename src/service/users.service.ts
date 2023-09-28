@@ -1,7 +1,7 @@
-import { IUserService } from '../../utils/interfaces/service/user.service.interface';
-import { IUser } from '../../utils/interfaces/infra/models/user-collection.interface';
-import { IUserRepository } from '../../utils/interfaces/repository/users.interface';
-import { createUserError, getUserByUsernameError } from '../../utils/errors/users.service.errors';
+import { IUserService } from '../utils/interfaces/service/user.service.interface';
+import { IUser } from '../utils/interfaces/infra/models/user-collection.interface';
+import { IUserRepository } from '../utils/interfaces/repository/users.interface';
+import { createUserError, getUserByUsernameError } from '../utils/errors/users.service.errors';
 
 export type body = {
 	name: string;
