@@ -1,4 +1,4 @@
--   App criada como um boiler plate para futuros projetos.
+-   App criada para realizar tests E2E com vitest e solid.
 
 ## Stack utilizada
 
@@ -9,3 +9,5 @@
 -   Nodemon
 -   Tsx
 -   Tsup
+-   Solid
+-   Vitest
