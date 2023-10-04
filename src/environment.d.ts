@@ -3,7 +3,7 @@ declare global {
 	namespace NodeJS {
 		interface ProcessEnv {
 			readonly PORT: number;
-			readonly MONGO_URI: string;
+			MONGO_URI: string;
 		}
 	}
 }
