@@ -26,7 +26,7 @@ class UserService implements IUserService {
 		}
 	}
 
-	async getUserByUsername(username: string): Promise<IUser> {
+	async getUserByUsername(username: string): Promise<IUser | Boolean> {
 		try {
 			return await this.userRepository.findByUsername(username);
 		} catch (error) {
