@@ -9,7 +9,6 @@ export class UserRepository implements IUserRepository {
 		password: string,
 		created_at: Date,
 	): Promise<IUser> {
-		console.log(name, username, password, created_at);
 		const newUser = new Users({ name, username, password, created_at });
 		return newUser.save();
 	}
