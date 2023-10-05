@@ -14,15 +14,11 @@ export class UserRepository implements IUserRepository {
 	}
 
 	async findByUsername(username: string): Promise<IUser | Boolean> {
-		try {
-			const user = await Users.findOne({ username });
-			if (user) {
-				return user;
-			} else {
-				return false;
-			}
-		} catch (error) {
-			throw new Error(`error`);
+		const user = await Users.findOne({ username });
+		if (user) {
+			return user;
+		} else {
+			return false;
 		}
 	}
 }

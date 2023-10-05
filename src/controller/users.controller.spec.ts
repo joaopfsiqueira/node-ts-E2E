@@ -20,7 +20,7 @@ describe('UserController E2E Tests', () => {
 		app = new App([userController]).app;
 
 		// importando dotenv e falando que o caminho do dotenv a ser utilizado é o seguinte:
-		dotenv.config({ path: '../../.env.test' });
+		dotenv.config({ path: '.env.test' });
 
 		//connecta no banco de dados
 		await mongo.connect();
@@ -31,7 +31,7 @@ describe('UserController E2E Tests', () => {
 	it('should create a new user via POST request', async () => {
 		const newUser = {
 			name: 'John Doe2',
-			username: 'teste12',
+			username: 'joao12',
 			password: 'password',
 		};
 
