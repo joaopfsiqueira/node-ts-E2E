@@ -15,8 +15,8 @@ class UserController implements IController {
 	}
 
 	private initializeRouter(): void {
-		this.router.post(`${this.basePath}/`, this.createUser.bind(this));
-		this.router.get(`${this.basePath}/user`, this.getUser.bind(this));
+		this.router.post(`${this.basePath}`, this.createUser.bind(this));
+		this.router.get(`${this.basePath}/username`, this.getUser.bind(this));
 	}
 
 	private async createUser(req: Request, res: Response): Promise<Response | Error> {
