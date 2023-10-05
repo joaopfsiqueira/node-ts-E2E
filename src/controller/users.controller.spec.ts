@@ -14,24 +14,24 @@ describe('UserController E2E Tests', () => {
 	const mongo = new MongoDbConn();
 
 	beforeAll(async () => {
-		// Configure a instância da aplicação Express com os controladores e serviços reais
 		const userRepository = new UserRepository();
 		const userService = new UserService(userRepository);
 		const userController = new UserController(userService);
 		app = new App([userController]).app;
 
+		// importando dotenv e falando que o caminho do dotenv a ser utilizado é o seguinte:
 		dotenv.config({ path: '../../.env.test' });
 
+		//connecta no banco de dados
 		await mongo.connect();
 
-		// Configure o supertest com a aplicação Express
 		api = request(app);
 	});
 
 	it('should create a new user via POST request', async () => {
 		const newUser = {
-			name: 'John Doe',
-			username: 'teste1',
+			name: 'John Doe2',
+			username: 'teste12',
 			password: 'password',
 		};
 
@@ -39,7 +39,7 @@ describe('UserController E2E Tests', () => {
 
 		expect(response.body).toHaveProperty('Message');
 		expect(response.body.Message).toBe('User created successfully');
-	}, 15000);
+	});
 
 	it('should not create a new user via POST request because already exists', async () => {
 		const newUser = {
@@ -48,20 +48,25 @@ describe('UserController E2E Tests', () => {
 			password: 'password',
 		};
 
-		const response = await api.post('/users').send(newUser).expect(200);
+		const response = await api.post('/users').send(newUser).expect(400);
 
-		expect(response.body).toHaveProperty('Message');
-		expect(response.body.Message).toBe('User created successfully');
-	}, 15000);
+		expect(response.body.Message).toBe('Erro ao criar usuário - User already exists');
+	});
 
 	it('should get a user by username via GET request', async () => {
 		const username = { username: 'joaosiq' }; // Suponha que você tenha um usuário com este nome
 
-		const response = await api.get(`/users/username`).send(username).expect(200);
+		const response = await api.get(`/users/username`).send(username);
 
 		// Verifique a resposta ou o banco de dados conforme necessário
 		expect(response.status).toBe(200);
 	});
 
-	// Adicione mais testes E2E conforme necessário para outras rotas e casos de uso
+	it('should not be able to find a user by username via GET request because not exist', async () => {
+		const username = { username: 'joaosiq2' }; // Suponha que você tenha um usuário com este nome
+
+		const response = await api.get(`/users/username`).send(username).expect(400);
+
+		expect(response.body.Message).toBe('Usuário não encontrado! - User does not exist');
+	});
 });
