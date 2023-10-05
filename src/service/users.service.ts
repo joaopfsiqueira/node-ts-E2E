@@ -28,7 +28,12 @@ class UserService implements IUserService {
 
 	async getUserByUsername(username: string): Promise<IUser | Boolean> {
 		try {
-			return await this.userRepository.findByUsername(username);
+			const user = await this.userRepository.findByUsername(username);
+			if (user) {
+				return user;
+			} else {
+				throw new Error('User does not exist');
+			}
 		} catch (error) {
 			throw new getUserByUsernameError(error);
 		}
