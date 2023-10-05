@@ -27,7 +27,7 @@ class UserController implements IController {
 			const isError = error instanceof Error;
 			return isError
 				? res.status(Http.BAD_REQUEST).send({ Message: `${error.message}` })
-				: res.status(Http.BAD_REQUEST).send(String(error));
+				: res.status(Http.BAD_REQUEST).send(error);
 		}
 	}
 
