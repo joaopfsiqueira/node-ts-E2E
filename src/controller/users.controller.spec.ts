@@ -1,37 +1,52 @@
 import request from 'supertest';
 import express from 'express';
-import { describe, it, beforeAll, expect } from 'vitest';
+import { describe, it, beforeAll, expect, afterAll } from 'vitest';
 import App from '../app'; // Importe sua aplicação Express
 import UserController from './users.controller'; // Importe o controller
 import UserService from '../service/users.service'; // Importe o serviço
 import { UserRepository } from '../repositories/users.repository'; // Importe o repositório
-import { MongoDbConn } from '../infra/mongoose/mongodb';
 import dotenv from 'dotenv';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
 
 describe('UserController E2E Tests', () => {
 	let app: express.Application;
 	let api: request.SuperTest<request.Test>; // Variável para a configuração do supertest
-	const mongo = new MongoDbConn();
+	let mongoServer: MongoMemoryServer;
 
 	beforeAll(async () => {
-		const userRepository = new UserRepository();
-		const userService = new UserService(userRepository);
-		const userController = new UserController(userService);
-		app = new App([userController]).app;
-
 		// importando dotenv e falando que o caminho do dotenv a ser utilizado é o seguinte:
 		dotenv.config({ path: '.env.test' });
 
-		//connecta no banco de dados
-		await mongo.connect();
+		// Inicie o servidor de memória MongoDB
+		mongoServer = await MongoMemoryServer.create();
+
+		// Obtenha a URI do servidor de memória
+		const mongoUri = await mongoServer.getUri();
+		console.log(mongoUri);
+
+		// Conecte-se ao servidor de memória MongoDB
+		await mongoose.connect(`${mongoUri}test-collection`);
+
+		const userRepository = new UserRepository();
+		const userService = new UserService(userRepository);
+		const userController = new UserController(userService);
+
+		app = new App([userController]).app;
 
 		api = request(app);
 	});
 
+	afterAll(async () => {
+		await mongoose.connection.dropDatabase();
+		await mongoose.connection.close();
+		await mongoServer.stop();
+	});
+
 	it('should create a new user via POST request', async () => {
 		const newUser = {
-			name: 'John Doe2',
-			username: 'joao12',
+			name: 'John Doe',
+			username: 'joao',
 			password: 'password',
 		};
 
@@ -39,12 +54,12 @@ describe('UserController E2E Tests', () => {
 
 		expect(response.body).toHaveProperty('Message');
 		expect(response.body.Message).toBe('User created successfully');
-	});
+	}, 10000);
 
 	it('should not create a new user via POST request because already exists', async () => {
 		const newUser = {
 			name: 'John Doe',
-			username: 'teste3',
+			username: 'joao',
 			password: 'password',
 		};
 
@@ -54,7 +69,7 @@ describe('UserController E2E Tests', () => {
 	});
 
 	it('should get a user by username via GET request', async () => {
-		const username = { username: 'joaosiq' }; // Suponha que você tenha um usuário com este nome
+		const username = { username: 'joao' }; // Suponha que você tenha um usuário com este nome
 
 		const response = await api.get(`/users/username`).send(username);
 
