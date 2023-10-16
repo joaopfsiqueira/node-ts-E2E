@@ -11,3 +11,6 @@
 -   Tsup
 -   Solid
 -   Vitest
+-   Supertest
+-   Mongoose
+-   MongoMemoryServer
